@@ -7,7 +7,7 @@ public class SearchPriceUseCase {
     private PriceService priceService;
     public SearchPriceUseCase (PriceService priceService) { this.priceService = priceService; }
 
-    public SearchPriceResponse execute (SearchPricePetititon petititon) {
+    public SearchPriceResponse execute (SearchPricePetition petititon) {
 
         return SearchPriceResponse.builder()
                 .productId("35455")

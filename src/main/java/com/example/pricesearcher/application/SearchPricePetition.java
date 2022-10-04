@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class SearchPricePetititon {
+public class SearchPricePetition {
 
     private final String applicationDate;
     private final String productId;

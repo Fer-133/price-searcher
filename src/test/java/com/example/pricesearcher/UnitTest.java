@@ -1,6 +1,6 @@
 package com.example.pricesearcher;
 
-import com.example.pricesearcher.application.SearchPricePetititon;
+import com.example.pricesearcher.application.SearchPricePetition;
 import com.example.pricesearcher.application.SearchPriceResponse;
 import com.example.pricesearcher.application.SearchPriceUseCase;
 import com.example.pricesearcher.domain.PriceDO;
@@ -27,7 +27,7 @@ public class UnitTest {
         PriceService priceService = new PriceService(priceRepository);
         SearchPriceUseCase searchPriceUseCase = new SearchPriceUseCase(priceService);
 
-        SearchPricePetititon petition = SearchPricePetititon.builder()
+        SearchPricePetition petition = SearchPricePetition.builder()
                 .applicationDate("2020-06-14-10.00.00")
                 .productId("35455")
                 .brandId("1")
