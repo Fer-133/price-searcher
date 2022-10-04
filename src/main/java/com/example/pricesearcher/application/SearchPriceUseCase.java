@@ -1,6 +1,13 @@
 package com.example.pricesearcher.application;
 
+import com.example.pricesearcher.domain.PriceDO;
 import com.example.pricesearcher.domain.PriceService;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class SearchPriceUseCase {
 
@@ -9,15 +16,23 @@ public class SearchPriceUseCase {
 
     public SearchPriceResponse execute (SearchPricePetition petititon) {
 
-        return SearchPriceResponse.builder()
-                .productId("35455")
-                .brandId("1")
-                .priceList("1")
-                .startDate("2020-06-14-00.00.00")
-                .endDate("2020-12-31-23.59.59")
-                .finalPrice("35.50 EUR")
-                .build();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
+        LocalDateTime dateTime = LocalDateTime.parse(petititon.getApplicationDate(), formatter);
 
+        DecimalFormat df = new DecimalFormat("#.00", DecimalFormatSymbols.getInstance(Locale.US));
+
+        PriceDO priceDO = priceService.findPrice(dateTime, petititon.getProductId(), petititon.getBrandId());
+
+
+
+        return SearchPriceResponse.builder()
+                .productId(priceDO.getProductId())
+                .brandId(priceDO.getBrandId())
+                .priceList(priceDO.getPriceList())
+                .startDate(formatter.format(priceDO.getStartDate()))
+                .endDate(formatter.format(priceDO.getEndDate()))
+                .finalPrice(df.format(priceDO.getPrice()) + " " + priceDO.getCurrency())
+                .build();
     }
 
 }

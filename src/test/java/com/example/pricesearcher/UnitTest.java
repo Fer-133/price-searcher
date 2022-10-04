@@ -46,7 +46,113 @@ public class UnitTest {
         assertEquals("35.50 EUR", response.getFinalPrice());
     }
 
+    @Test
+    public void shouldPassSecondTest() {
 
+        //Given
+        PriceRepository priceRepository = mock(PriceRepository.class);
+        PriceService priceService = new PriceService(priceRepository);
+        SearchPriceUseCase searchPriceUseCase = new SearchPriceUseCase(priceService);
+
+        SearchPricePetition petition = SearchPricePetition.builder()
+                .applicationDate("2020-06-14-16.00.00")
+                .productId("35455")
+                .brandId("1")
+                .build();
+
+        //When
+        when(priceRepository.findAll()).thenReturn(getAllPrices());
+        SearchPriceResponse response = searchPriceUseCase.execute(petition);
+
+        //Then
+        assertEquals("35455", response.getProductId());
+        assertEquals("1", response.getBrandId());
+        assertEquals("2", response.getPriceList());
+        assertEquals("2020-06-14-15.00.00", response.getStartDate());
+        assertEquals("2020-06-14-18.30.00", response.getEndDate());
+        assertEquals("25.45 EUR", response.getFinalPrice());
+    }
+
+    @Test
+    public void shouldPassThirdTest() {
+
+        //Given
+        PriceRepository priceRepository = mock(PriceRepository.class);
+        PriceService priceService = new PriceService(priceRepository);
+        SearchPriceUseCase searchPriceUseCase = new SearchPriceUseCase(priceService);
+
+        SearchPricePetition petition = SearchPricePetition.builder()
+                .applicationDate("2020-06-14-21.00.00")
+                .productId("35455")
+                .brandId("1")
+                .build();
+
+        //When
+        when(priceRepository.findAll()).thenReturn(getAllPrices());
+        SearchPriceResponse response = searchPriceUseCase.execute(petition);
+
+        //Then
+        assertEquals("35455", response.getProductId());
+        assertEquals("1", response.getBrandId());
+        assertEquals("1", response.getPriceList());
+        assertEquals("2020-06-14-00.00.00", response.getStartDate());
+        assertEquals("2020-12-31-23.59.59", response.getEndDate());
+        assertEquals("35.50 EUR", response.getFinalPrice());
+    }
+
+    @Test
+    public void shouldPassFourthTest() {
+
+        //Given
+        PriceRepository priceRepository = mock(PriceRepository.class);
+        PriceService priceService = new PriceService(priceRepository);
+        SearchPriceUseCase searchPriceUseCase = new SearchPriceUseCase(priceService);
+
+        SearchPricePetition petition = SearchPricePetition.builder()
+                .applicationDate("2020-06-15-10.00.00")
+                .productId("35455")
+                .brandId("1")
+                .build();
+
+        //When
+        when(priceRepository.findAll()).thenReturn(getAllPrices());
+        SearchPriceResponse response = searchPriceUseCase.execute(petition);
+
+        //Then
+        assertEquals("35455", response.getProductId());
+        assertEquals("1", response.getBrandId());
+        assertEquals("3", response.getPriceList());
+        assertEquals("2020-06-15-00.00.00", response.getStartDate());
+        assertEquals("2020-06-15-11.00.00", response.getEndDate());
+        assertEquals("30.50 EUR", response.getFinalPrice());
+    }
+
+    @Test
+    public void shouldPassFifthTest() {
+
+        //Given
+        PriceRepository priceRepository = mock(PriceRepository.class);
+        PriceService priceService = new PriceService(priceRepository);
+        SearchPriceUseCase searchPriceUseCase = new SearchPriceUseCase(priceService);
+
+        SearchPricePetition petition = SearchPricePetition.builder()
+                .applicationDate("2020-06-16-21.00.00")
+                .productId("35455")
+                .brandId("1")
+                .build();
+
+        //When
+        when(priceRepository.findAll()).thenReturn(getAllPrices());
+        SearchPriceResponse response = searchPriceUseCase.execute(petition);
+
+        //Then
+        assertEquals("35455", response.getProductId());
+        assertEquals("1", response.getBrandId());
+        assertEquals("4", response.getPriceList());
+        assertEquals("2020-06-15-16.00.00", response.getStartDate());
+        assertEquals("2020-12-31-23.59.59", response.getEndDate());
+        assertEquals("38.95 EUR", response.getFinalPrice());
+    }
 
     private List<PriceDO> getAllPrices() {
 
@@ -66,7 +172,7 @@ public class UnitTest {
                         PriceDO.builder()
                                 .brandId("1")
                                 .startDate(LocalDateTime.of(2020,06,14,15,00,00))
-                                .endDate(LocalDateTime.of(2020,06,14,18,30,30))
+                                .endDate(LocalDateTime.of(2020,06,14,18,30,00))
                                 .priceList("2")
                                 .productId("35455")
                                 .priority("1")
