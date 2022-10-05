@@ -1,7 +1,8 @@
 package com.example.pricesearcher.application;
 
-import com.example.pricesearcher.domain.PriceDO;
-import com.example.pricesearcher.domain.PriceService;
+import com.example.pricesearcher.domain.aggregates.PriceDO;
+import com.example.pricesearcher.domain.exceptions.PriceNotFoundException;
+import com.example.pricesearcher.domain.services.PriceService;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -14,14 +15,14 @@ public class SearchPriceUseCase {
     private PriceService priceService;
     public SearchPriceUseCase (PriceService priceService) { this.priceService = priceService; }
 
-    public SearchPriceResponse execute (SearchPricePetition petititon) {
+    public SearchPriceResponse execute (SearchPricePetition petition) throws PriceNotFoundException {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
-        LocalDateTime dateTime = LocalDateTime.parse(petititon.getApplicationDate(), formatter);
+        LocalDateTime dateTime = LocalDateTime.parse(petition.getApplicationDate(), formatter);
 
         DecimalFormat df = new DecimalFormat("#.00", DecimalFormatSymbols.getInstance(Locale.US));
 
-        PriceDO priceDO = priceService.findPrice(dateTime, petititon.getProductId(), petititon.getBrandId());
+        PriceDO priceDO = priceService.findPrice(dateTime, petition.getProductId(), petition.getBrandId());
 
         return SearchPriceResponse.builder()
                 .productId(priceDO.getProductId())

@@ -1,4 +1,8 @@
-package com.example.pricesearcher.domain;
+package com.example.pricesearcher.domain.services;
+
+import com.example.pricesearcher.domain.aggregates.PriceDO;
+import com.example.pricesearcher.domain.exceptions.PriceNotFoundException;
+import com.example.pricesearcher.domain.repositories.PriceRepository;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -11,7 +15,7 @@ public class PriceService {
 
     public PriceService (PriceRepository priceRepository) { this.priceRepository = priceRepository; }
 
-    public PriceDO findPrice(LocalDateTime applicationDate, String productId, String brandId){
+    public PriceDO findPrice(LocalDateTime applicationDate, String productId, String brandId) throws PriceNotFoundException {
 
         List<PriceDO> pricesDO = priceRepository.findAll();
 
@@ -25,7 +29,7 @@ public class PriceService {
         if (optionalPriceDO.isPresent()) {
             return optionalPriceDO.get();
         } else {
-            throw new RuntimeException();
+            throw new PriceNotFoundException("Precio no encontrado.");
         }
     }
 }

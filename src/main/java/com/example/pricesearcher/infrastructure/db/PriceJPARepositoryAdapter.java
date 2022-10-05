@@ -1,7 +1,7 @@
 package com.example.pricesearcher.infrastructure.db;
 
-import com.example.pricesearcher.domain.PriceDO;
-import com.example.pricesearcher.domain.PriceRepository;
+import com.example.pricesearcher.domain.aggregates.PriceDO;
+import com.example.pricesearcher.domain.repositories.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

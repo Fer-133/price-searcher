@@ -1,8 +1,8 @@
 package com.example.pricesearcher.infrastructure.config;
 
 import com.example.pricesearcher.application.SearchPriceUseCase;
-import com.example.pricesearcher.domain.PriceRepository;
-import com.example.pricesearcher.domain.PriceService;
+import com.example.pricesearcher.domain.repositories.PriceRepository;
+import com.example.pricesearcher.domain.services.PriceService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

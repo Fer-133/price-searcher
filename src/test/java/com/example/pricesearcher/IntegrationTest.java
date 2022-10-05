@@ -1,6 +1,7 @@
 package com.example.pricesearcher;
 
 import com.example.pricesearcher.application.SearchPriceResponse;
+import com.example.pricesearcher.domain.exceptions.PriceNotFoundException;
 import com.example.pricesearcher.infrastructure.db.PriceDB;
 import com.example.pricesearcher.infrastructure.db.PriceJPARepository;
 import com.example.pricesearcher.infrastructure.rest.PriceRestController;
@@ -14,12 +15,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -159,6 +162,20 @@ public class IntegrationTest {
         assertEquals("2020-12-31-23.59.59", searchPriceResponse.getEndDate());
         assertEquals("38.95 EUR", searchPriceResponse.getFinalPrice());
 
+    }
+
+    @Test
+    public void whenCantFindThePriceShouldReturnNotFoundStatus() throws Exception {
+
+        //Given
+        when(priceJPARepository.findAll()).thenReturn(getAllPrices());
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/prices/?applicationDate=2030-06-16-21.00.00&productId=35455&brandId=1");
+
+        //When
+        mvc.perform(requestBuilder)
+                //Then
+                .andExpect(status().isNotFound())
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof PriceNotFoundException));
     }
 
     private List<PriceDB> getAllPrices() {

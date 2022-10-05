@@ -1,4 +1,4 @@
-package com.example.pricesearcher.domain;
+package com.example.pricesearcher.domain.aggregates;
 
 import lombok.Builder;
 import lombok.Data;

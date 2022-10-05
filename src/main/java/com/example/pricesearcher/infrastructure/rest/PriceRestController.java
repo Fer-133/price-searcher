@@ -3,6 +3,7 @@ package com.example.pricesearcher.infrastructure.rest;
 import com.example.pricesearcher.application.SearchPricePetition;
 import com.example.pricesearcher.application.SearchPriceResponse;
 import com.example.pricesearcher.application.SearchPriceUseCase;
+import com.example.pricesearcher.domain.exceptions.PriceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,7 @@ public class PriceRestController {
             @RequestParam String applicationDate,
             @RequestParam String productId,
             @RequestParam String brandId
-    ){
+    ) throws PriceNotFoundException {
         SearchPricePetition petition = SearchPricePetition.builder()
                 .applicationDate(applicationDate)
                 .productId(productId)

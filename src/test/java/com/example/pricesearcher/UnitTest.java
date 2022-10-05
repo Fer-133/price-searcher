@@ -3,9 +3,10 @@ package com.example.pricesearcher;
 import com.example.pricesearcher.application.SearchPricePetition;
 import com.example.pricesearcher.application.SearchPriceResponse;
 import com.example.pricesearcher.application.SearchPriceUseCase;
-import com.example.pricesearcher.domain.PriceDO;
-import com.example.pricesearcher.domain.PriceRepository;
-import com.example.pricesearcher.domain.PriceService;
+import com.example.pricesearcher.domain.aggregates.PriceDO;
+import com.example.pricesearcher.domain.exceptions.PriceNotFoundException;
+import com.example.pricesearcher.domain.repositories.PriceRepository;
+import com.example.pricesearcher.domain.services.PriceService;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UnitTest {
 
     @Test
-    public void shouldPassFirstTest (){
+    public void shouldPassFirstTest () throws PriceNotFoundException {
 
         //Given
         PriceRepository priceRepository = mock(PriceRepository.class);
@@ -47,7 +48,7 @@ public class UnitTest {
     }
 
     @Test
-    public void shouldPassSecondTest() {
+    public void shouldPassSecondTest() throws PriceNotFoundException {
 
         //Given
         PriceRepository priceRepository = mock(PriceRepository.class);
@@ -74,7 +75,7 @@ public class UnitTest {
     }
 
     @Test
-    public void shouldPassThirdTest() {
+    public void shouldPassThirdTest() throws PriceNotFoundException {
 
         //Given
         PriceRepository priceRepository = mock(PriceRepository.class);
@@ -101,7 +102,7 @@ public class UnitTest {
     }
 
     @Test
-    public void shouldPassFourthTest() {
+    public void shouldPassFourthTest() throws PriceNotFoundException {
 
         //Given
         PriceRepository priceRepository = mock(PriceRepository.class);
@@ -128,7 +129,7 @@ public class UnitTest {
     }
 
     @Test
-    public void shouldPassFifthTest() {
+    public void shouldPassFifthTest() throws PriceNotFoundException {
 
         //Given
         PriceRepository priceRepository = mock(PriceRepository.class);
