@@ -1,17 +1,21 @@
 package com.example.pricesearcher.application;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SearchPriceResponse {
 
-    private final String productId;
-    private final String brandId;
-    private final String priceList;
-    private final String startDate;
-    private final String endDate;
-    private final String finalPrice;
+    private String productId;
+    private String brandId;
+    private String priceList;
+    private String startDate;
+    private String endDate;
+    private String finalPrice;
 
 }

@@ -23,8 +23,6 @@ public class SearchPriceUseCase {
 
         PriceDO priceDO = priceService.findPrice(dateTime, petititon.getProductId(), petititon.getBrandId());
 
-
-
         return SearchPriceResponse.builder()
                 .productId(priceDO.getProductId())
                 .brandId(priceDO.getBrandId())
