@@ -43,4 +43,10 @@ public class PriceDB {
     @Column(name = "CURRENCY")
     private String currency;
 
+    @Column(name = "LAST_UPDATE")
+    private LocalDateTime lastUpdate;
+
+    @Column(name = "LAST_UPDATE_BY")
+    private String lastUpdateBy;
+
 }
