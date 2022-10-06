@@ -4,7 +4,6 @@ import com.example.pricesearcher.application.SearchPriceResponse;
 import com.example.pricesearcher.domain.exceptions.PriceNotFoundException;
 import com.example.pricesearcher.infrastructure.db.PriceDB;
 import com.example.pricesearcher.infrastructure.db.PriceJPARepository;
-import com.example.pricesearcher.infrastructure.rest.PriceRestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,9 +30,6 @@ public class IntegrationTest {
 
     @Autowired
     private MockMvc mvc;
-
-    @Autowired
-    private PriceRestController priceRestController;
 
     @MockBean
     private PriceJPARepository priceJPARepository;
