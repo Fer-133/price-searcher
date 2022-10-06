@@ -23,7 +23,19 @@ H2 Database
 
 ## How to use it
 
-Run the project and launch a request to the /prices/ endpoint using the localhost address and 8080 port with the required parameters (applicationDate, productId and brandId) and you will receibe a JSON with the information.
+### Build and run the application
+
+To build the application use this command on the project directory:
+
+mvn package
+
+To run the application use the next command:
+
+mvn spring-boot:run
+
+### Launch a request
+
+Launch a request to the /prices/ endpoint using the localhost address and 8080 port with the required parameters (applicationDate, productId and brandId) and you will receibe a JSON with the information.
 
 And example of the request would be:
 
