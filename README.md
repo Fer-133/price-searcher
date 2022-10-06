@@ -72,3 +72,21 @@ And if the product is not found:
  "message" : "Precio no encontrado"
  
 }
+
+## How to run the tests
+
+If you want to run all the test use the following command:
+
+mvn test
+
+If you only want to run the unit test use the following command:
+
+mvn -Dtest=UnitTest test
+
+To run only the integration test use the following command:
+
+mvn -Dtest=IntegrationTest test
+
+To run only the system test use the next command:
+
+mvn -Dtest=SystemTest test
